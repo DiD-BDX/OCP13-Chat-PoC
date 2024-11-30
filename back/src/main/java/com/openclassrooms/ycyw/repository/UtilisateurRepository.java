@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.openclassrooms.ycyw.models.Utilisateur;
 
 @Repository
-public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
+public interface UtilisateurRepository extends JpaRepository<Utilisateur, Integer> {
 }
 
