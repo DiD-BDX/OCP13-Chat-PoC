@@ -1,14 +1,13 @@
 package com.openclassrooms.ycyw.dto;
 
-import java.time.LocalDateTime;
-
-import lombok.*;
+import lombok.Data;
+import java.time.LocalDate;
 
 @Data
 public class UtilisateurDTO {
-    private Long id;
+    private Integer id;
     private String nom;
+    private String prénom;
     private String email;
-    private LocalDateTime dateInscription;
+    private LocalDate dateNaissance;
 }
-

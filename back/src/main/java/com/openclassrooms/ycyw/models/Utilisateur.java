@@ -1,28 +1,21 @@
 package com.openclassrooms.ycyw.models;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "Utilisateur")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     private String nom;
-
-    @Column(unique = true)
+    private String prénom;
     private String email;
-
     private String motDePasse;
 
-    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime dateInscription;
+    @Column(name = "date_naissance")
+    private LocalDate dateNaissance;
 }
