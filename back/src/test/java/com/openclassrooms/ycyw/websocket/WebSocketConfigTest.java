@@ -1,4 +1,4 @@
-package com.openclassrooms.websocket;
+package com.openclassrooms.ycyw.websocket;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -13,8 +13,6 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.StompWebSocketEndpointRegistration;
 import org.springframework.web.socket.config.annotation.SockJsServiceRegistration;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
-
-import com.openclassrooms.ycyw.websocket.WebSocketConfig;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 

@@ -1,10 +1,9 @@
-package com.openclassrooms.controllers;
+package com.openclassrooms.ycyw.controllers;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.openclassrooms.ycyw.controllers.ChatController;
 import com.openclassrooms.ycyw.dto.ChatDTO;
 import com.openclassrooms.ycyw.models.Chat;
 import com.openclassrooms.ycyw.models.Utilisateur;
