@@ -1,13 +1,19 @@
-<div class="chat-container">
-  <div *ngFor="let message of messages" class="chat-message">
-    <p><strong>Sender ID:</strong> {{ message.senderId }}</p>
-    <p><strong>Content:</strong> {{ message.content }}</p>
-    <p><strong>Timestamp:</strong> {{ message.timestamp }}</p>
-    <p><strong>Status:</strong> {{ message.status }}</p>
+<div class="chat-wrapper">
+  <div class="chat-container">
+    <div class="messages-container" #messagesContainer>
+      <div *ngFor="let message of messages" class="chat-message" [ngClass]="{'sent': message.senderId === userId, 'received': message.senderId !== userId}">
+        <div class="message-info">
+          <p class="sender"><strong>De:</strong> {{ message.senderSurname }} {{ message.senderName }}</p>
+        </div>
+        <div class="message-bubble">
+          <p>{{ message.content }}</p>
+          <p class="timestamp">{{ message.timestamp }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="chat-input">
+      <input [(ngModel)]="newMessage" placeholder="Type your message here..." />
+      <button (click)="sendMessage()">Send</button>
+    </div>
   </div>
-</div>
-
-<div class="chat-input">
-  <input [(ngModel)]="newMessage" placeholder="Type your message here..." />
-  <button (click)="sendMessage()">Send</button>
 </div>

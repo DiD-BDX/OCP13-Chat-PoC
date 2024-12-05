@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { WebsocketService } from '../../services/websocket.service';
 import { UserService } from '../../services/user.service';
 import { Message } from '../../interfaces/message';
@@ -8,7 +8,10 @@ import { Message } from '../../interfaces/message';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterViewChecked {
+
+  @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
+
   messages: Message[] = [];
   newMessage: string = '';
   userId: number = 0;
@@ -39,8 +42,16 @@ export class ChatComponent implements OnInit {
     this.websocketService.watch('/topic/public').subscribe({
       next: (message) => {
         console.log('----------chatComponentTS : Received message:', message.body);
-        const parsedMessage = JSON.parse(message.body);
-        this.messages.push(parsedMessage);
+        const parsedMessage: Message = JSON.parse(message.body);
+        parsedMessage.timestamp = this.formatTimestamp(parsedMessage.timestamp);
+        this.userService.getUserById(parsedMessage.senderId).subscribe({
+          next: (user) => {
+            parsedMessage.senderName = user.nom;
+            parsedMessage.senderSurname = user.prénom;
+            this.messages.push(parsedMessage);
+          },
+          error: (error) => console.error('----------chatComponentTS : Failed to get user info', error)
+        });
       },
       error: (error) => console.error('----------chatComponentTS : Failed to receive message', error)
     });
@@ -58,6 +69,28 @@ export class ChatComponent implements OnInit {
       console.log('----------chatComponentTS : Sending message:', message);
       this.websocketService.publish('/app/chat.sendMessage', message);
       this.newMessage = '';
+      this.scrollToBottom();
+    }
+  }
+
+  private formatTimestamp(timestamp: string): string {
+    const date = new Date(timestamp);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${day}/${month} ${hours}:${minutes}`;
+  }
+
+  ngAfterViewChecked(): void {
+    this.scrollToBottom();
+  }
+  
+  private scrollToBottom(): void {
+    try {
+      this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
+    } catch (err) {
+      console.error('----------chatComponentTS : Failed to scroll to bottom', err);
     }
   }
 }

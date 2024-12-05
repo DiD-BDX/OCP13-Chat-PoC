@@ -27,6 +27,17 @@ export class UserService {
     return this.http.get<number>(`${this.apiUrl}/user/id`, { headers });
   }
 
+  getUserById(userId: number): Observable<{ nom: string, prénom: string }> {
+    const credentials = this.getCredentials();
+    if (!credentials) {
+      throw new Error('No credentials found');
+    }
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic ' + btoa(`${credentials.email}:${credentials.password}`)
+    });
+    return this.http.get<{ nom: string, prénom: string }>(`${this.apiUrl}/user/${userId}`, { headers });
+  }
+
   getConversationId(email: string, password: string): Observable<number> {
     console.log('--------userServiceTS : Fetching conversation ID for email:', email);
     const headers = new HttpHeaders({

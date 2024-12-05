@@ -4,4 +4,6 @@ export interface Message {
     content: string;
     timestamp: string;
     status: string;
+    senderName?: string;
+    senderSurname?: string;
 }

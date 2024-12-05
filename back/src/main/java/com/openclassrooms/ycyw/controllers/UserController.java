@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,6 +35,14 @@ public class UserController {
         Utilisateur currentUser = utilisateurService.getCurrentUser();
         logger.info("-------------UserControllerJAVA : Current user ID: {}", currentUser.getId());
         return currentUser.getId();
+    }
+
+    @GetMapping("/api/user/{id}")
+    public Utilisateur getUserById(@PathVariable int id) {
+        logger.info("-------------UserControllerJAVA : Attempting to get user by ID: {}", id);
+        Utilisateur user = utilisateurService.findById(id);
+        logger.info("-------------UserControllerJAVA : User found: {}", user);
+        return user;
     }
 
     @GetMapping("/api/conversation/id")
