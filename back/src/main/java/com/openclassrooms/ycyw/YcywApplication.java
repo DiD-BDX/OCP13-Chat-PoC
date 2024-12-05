@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @EnableJpaAuditing
-@ComponentScan(basePackages = {"com.openclassrooms.ycyw", "repository", "models"})
+@ComponentScan(basePackages = {"com.openclassrooms.ycyw"})
 public class YcywApplication {
 
 	public static void main(String[] args) {

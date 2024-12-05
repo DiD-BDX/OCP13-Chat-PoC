@@ -23,7 +23,7 @@ public interface ChatMapper {
     }
 
     static Chat toEntity(ChatDTO chatDTO, Utilisateur sender) {
-        if (chatDTO == null) {
+        if (chatDTO == null || sender == null) {
             return null;
         }
 

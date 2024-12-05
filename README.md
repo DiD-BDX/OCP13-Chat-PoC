@@ -27,8 +27,8 @@ psql -h localhost -U didierbd -d ocp13poc -f utilisateur.sql
 ```
 pour inserer des données dans la table "utilisateur"
 ```bash
-INSERT INTO Utilisateur (nom, email, mot_de_passe) 
-VALUES ('John Doe', 'john@example.com', 'password123');
+INSERT INTO Utilisateur (nom, email, mot_de_passe, prénom) 
+VALUES ('Doe', 'john@example.com', 'password123', 'John');
 ```
 Pour lister les tables une fois connecté
 ```

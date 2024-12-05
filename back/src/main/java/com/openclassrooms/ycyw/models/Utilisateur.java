@@ -14,6 +14,8 @@ public class Utilisateur {
     private String nom;
     private String prénom;
     private String email;
+
+    @Column(name = "mot_de_passe")
     private String motDePasse;
 
     @Column(name = "date_naissance")

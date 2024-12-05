@@ -15,9 +15,10 @@ public class Chat {
     @JoinColumn(name = "sender_id", nullable = false)
     private Utilisateur sender;
 
+    @Column(name = "conversation_id")
     private Integer conversationId;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     private LocalDateTime timestamp;
