@@ -20,6 +20,8 @@ export class LoginComponent {
         console.log('------------loginComponentTS : Login successful');
         // Stocker les informations d'identification dans le service
         this.userService.setCredentials(this.email, this.password);
+        sessionStorage.setItem('email', this.email);
+        sessionStorage.setItem('password', this.password);
         // Rediriger vers la page de chat après une connexion réussie
         this.router.navigate(['/chat']);
       },

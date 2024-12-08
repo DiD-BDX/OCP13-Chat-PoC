@@ -22,21 +22,28 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   ngOnInit(): void {
     console.log('----------chatComponentTS : Chat component initialized');
     const credentials = this.userService.getCredentials();
+    
     if (credentials) {
-      console.log('----------chatComponentTS : Credentials found:', credentials);
-      this.userService.getUserId(credentials.email, credentials.password).subscribe({
-        next: (id) => {
-          console.log('----------chatComponentTS : User ID fetched:', id);
-          this.userId = id;
-        },
-        error: (error) => console.error('----------chatComponentTS : Failed to get user ID', error)
-      });
-      this.userService.getConversationId(credentials.email, credentials.password).subscribe({
-        next: (id) => this.conversationId = id,
-        error: (error) => console.error('----------chatComponentTS : Failed to get conversation ID', error)
-      });
+      const email = credentials.email;
+      const password = credentials.password;
+      if (email && password) {
+        console.log('----------chatComponentTS : Credentials found:', { email, password });
+        this.userService.getUserId(email, password).subscribe({
+          next: (id) => {
+            console.log('----------chatComponentTS : User ID fetched:', id);
+            this.userId = id;
+          },
+          error: (error) => console.error('----------chatComponentTS : Failed to get user ID', error)
+        });
+        this.userService.getConversationId(email, password).subscribe({
+          next: (id) => this.conversationId = id,
+          error: (error) => console.error('----------chatComponentTS : Failed to get conversation ID', error)
+        });
+      } else {
+        console.error('----------chatComponentTS : No credentials found');
+      }
     } else {
-      console.error('----------chatComponentTS : No credentials found');
+      console.error('----------chatComponentTS : Credentials are null');
     }
 
     this.websocketService.watch('/topic/public').subscribe({

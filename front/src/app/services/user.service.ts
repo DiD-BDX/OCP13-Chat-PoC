@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
   private apiUrl = 'http://localhost:8080/api'; // Remplacez par l'URL de votre API
+  private credentialsKey = 'authCredentials';
   private credentials: { email: string, password: string } | null = null;
   
   constructor(private http: HttpClient) {}
@@ -48,11 +49,18 @@ export class UserService {
 
   setCredentials(email: string, password: string): void {
     console.log('--------userServiceTS : Setting credentials for email:', email);
-    this.credentials = { email, password };
+    const credentials = { email, password };
+    sessionStorage.setItem(this.credentialsKey, JSON.stringify(credentials));
   }
 
   getCredentials(): { email: string, password: string } | null {
     console.log('--------userServiceTS : Getting stored credentials');
-    return this.credentials;
+    const credentials = sessionStorage.getItem(this.credentialsKey);
+    return credentials ? JSON.parse(credentials) : null;
+  }
+
+  clearCredentials(): void {
+    console.log('--------userServiceTS : Clearing stored credentials');
+    sessionStorage.removeItem(this.credentialsKey);
   }
 }
