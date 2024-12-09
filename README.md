@@ -1,73 +1,131 @@
-**TABLE OF CONTENTS**
+# Projet OC-P13-Chat-PoC
 
-- [1. PostgreSQL](#1-postgresql)
-- [2. Backend (Spring Boot)](#2-backend-spring-boot)
-  - [Spring Initializr.](#spring-initializr)
-    - [Dépendances :](#dépendances-)
-- [3. Frontend (Angular)](#3-frontend-angular)
-  - [Créer un projet Angular](#créer-un-projet-angular)
+Ce projet est une preuve de concept (PoC) pour une application de chat en temps réel utilisant Spring Boot pour le backend et Angular pour le frontend. L'application permet aux utilisateurs de se connecter, de rejoindre des conversations et d'échanger des messages via WebSocket.
 
-# 1. PostgreSQL
-Se connecter a la base de donnée PostgreSQL
-```bash
-psql -h localhost -U didierbd -d ocp13poc
-```
-pour creer la table "chat" depuis un fichier sql
-```bash
-psql -h localhost -U didierbd -d ocp13poc -f chat.sql
-```
-pour inserer des données dans la table "chat"
-```bash
-INSERT INTO Chat (sender_id, content, status) 
-VALUES (1, 'Hello World!', 'sent');
-```
-pour creer la table "utilisateur" depuis un fichier sql
-```bash
-psql -h localhost -U didierbd -d ocp13poc -f utilisateur.sql
-```
-pour inserer des données dans la table "utilisateur"
-```bash
-INSERT INTO Utilisateur (nom, email, mot_de_passe, prénom) 
-VALUES ('Doe', 'john@example.com', 'password123', 'John');
-```
-Pour lister les tables une fois connecté
-```
-\dt
-```
-pour voir les données de la table "chat"
-```
-SELECT * FROM chat;
-```
-pour voir les données de la table "utilisateur"
-```
-SELECT * FROM utilisateur;
-```
-pour voir les champs de la table "chat"
-```
-\d chat
-```
-pour voir les champs de la table "utilisateur"
-```
-\d utilisateur
-```
-pour quitter la base de donnée
-```
-\q
-```
-# 2. Backend (Spring Boot)
-## Spring Initializr.
-### Dépendances :
-- Web
-- WebSocket
-- Spring Security
+## Sommaire
+
+- [Projet OC-P13-Chat-PoC](#projet-oc-p13-chat-poc)
+  - [Sommaire](#sommaire)
+  - [Prérequis](#prérequis)
+  - [Installation](#installation)
+    - [Backend](#backend)
+    - [Frontend](#frontend)
+  - [Configuration](#configuration)
+    - [Backend](#backend-1)
+    - [Frontend](#frontend-1)
+  - [Lancement de l'application](#lancement-de-lapplication)
+    - [Backend](#backend-2)
+    - [Frontend](#frontend-2)
+  - [Architecture du projet](#architecture-du-projet)
+    - [Backend](#backend-3)
+    - [Frontend](#frontend-3)
+  - [Fonctionnalités](#fonctionnalités)
+  - [Technologies utilisées](#technologies-utilisées)
+  - [Contributeurs](#contributeurs)
+
+## Prérequis
+
+- Java 17
+- Node.js et npm
+- Maven
 - PostgreSQL
 
-# 3. Frontend (Angular)
-## Créer un projet Angular
-```bash
-ng new chat-poc
-cd chat-poc
-ng generate component chat
-npm install @stomp/rx-stomp
-npm install sockjs-client
-```
+## Installation
+
+### Backend
+
+1. Clonez le dépôt :
+  ```bash
+  git clone <URL_DU_DEPOT>
+  cd <NOM_DU_DEPOT>
+  ```
+
+2. Installez les dépendances Maven :
+  ```bash
+  mvn clean install
+  ```
+
+### Frontend
+
+1. Accédez au répertoire Angular :
+  ```bash
+  cd frontend
+  ```
+
+2. Installez les dépendances npm :
+  ```bash
+  npm install
+  ```
+
+## Configuration
+
+### Backend
+
+1. Configurez les variables d'environnement pour PostgreSQL :
+  ```bash
+  export PGDB_USERNAME=<votre_nom_utilisateur>
+  export PGDB_PASSWORD=<votre_mot_de_passe>
+  ```
+
+2. Modifiez le fichier `application.properties` si nécessaire :
+  ```properties
+  spring.datasource.url=jdbc:postgresql://localhost:5432/ocp13poc
+  spring.datasource.username=${PGDB_USERNAME}
+  spring.datasource.password=${PGDB_PASSWORD}
+  ```
+
+### Frontend
+
+1. Modifiez le fichier `environment.ts` si nécessaire pour pointer vers le backend.
+
+## Lancement de l'application
+
+### Backend
+
+1. Démarrez le serveur Spring Boot :
+  ```bash
+  mvn spring-boot:run
+  ```
+
+### Frontend
+
+1. Démarrez le serveur Angular :
+  ```bash
+  ng serve
+  ```
+
+2. Accédez à l'application via `http://localhost:4200`.
+
+## Architecture du projet
+
+### Backend
+
+- `src/main/java/com/openclassrooms/ycyw/config` : Configuration de sécurité et CORS.
+- `src/main/java/com/openclassrooms/ycyw/controllers` : Contrôleurs pour gérer les requêtes HTTP et WebSocket.
+- `src/main/java/com/openclassrooms/ycyw/services` : Services pour la logique métier.
+- `src/main/java/com/openclassrooms/ycyw/models` : Modèles de données.
+- `src/main/java/com/openclassrooms/ycyw/dto` : Objets de transfert de données.
+- `src/main/java/com/openclassrooms/ycyw/mapper` : Mappers pour convertir entre DTOs et entités.
+
+### Frontend
+
+- `src/app/components` : Composants Angular pour l'interface utilisateur.
+- `src/app/services` : Services Angular pour les appels API et WebSocket.
+- `src/app/routes` : Configuration des routes de l'application.
+
+## Fonctionnalités
+
+- Connexion utilisateur
+- Envoi et réception de messages en temps réel via WebSocket
+- Affichage des conversations
+- Gestion des utilisateurs
+
+## Technologies utilisées
+
+- Backend : Spring Boot, Spring Security, WebSocket, PostgreSQL
+- Frontend : Angular, RxJS, TypeScript
+- Outils : Maven, npm
+
+## Contributeurs
+
+- Didier BD
