@@ -2,7 +2,12 @@ import { Injectable } from '@angular/core';
 import { RxStomp } from '@stomp/rx-stomp';
 import { RxStompConfig } from '@stomp/rx-stomp/esm6';
 import { Observable } from 'rxjs';
+import { WebSocketMessage } from '../interfaces/websocket-message';
 
+/**
+ * Service WebSocket pour gérer les connexions et les communications via WebSocket.
+ * @class
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -25,12 +30,16 @@ export class WebsocketService {
     this.rxStomp.activate();
   }
 
-  public watch(topic: string): Observable<any> {
+  /**
+   * Écoute les messages sur un sujet spécifique.
+   * @param {string} topic - Le sujet à écouter.
+   * @returns {Observable<WebSocketMessage>} - Un observable des messages reçus.
+   */
+  public watch(topic: string): Observable<WebSocketMessage> {
     return new Observable((observer) => {
       this.rxStomp.watch(topic).subscribe({
         next: (message) => {
-          console.log('---------------WebsocketServiceTS : Received message:', message.body);
-          observer.next(message);
+          observer.next({ body: message.body });
         },
         error: (err) => observer.error(err),
         complete: () => observer.complete()
@@ -38,9 +47,13 @@ export class WebsocketService {
     });
   }
 
-  public publish(destination: string, body: any): void {
+  /**
+   * Publie un message sur une destination spécifique.
+   * @param {string} destination - La destination du message.
+   * @param {object} body - Le corps du message.
+   */
+  public publish(destination: string, body: object): void {
     const message = JSON.stringify(body);
-    console.log('---------------WebsocketServiceTS : Sending message:', message);
     this.rxStomp.publish({ destination, body: message });
   }
 }

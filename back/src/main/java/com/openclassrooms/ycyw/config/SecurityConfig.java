@@ -1,7 +1,5 @@
 package com.openclassrooms.ycyw.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -19,17 +17,21 @@ import com.openclassrooms.ycyw.services.CustomUserDetailsService;
 @Configuration
 public class SecurityConfig {
 
-    private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
-
+    /**
+     * Configure la chaîne de filtres de sécurité.
+     *
+     * @param http l'objet HttpSecurity à configurer
+     * @return l'objet SecurityFilterChain configuré
+     * @throws Exception si une erreur de configuration survient
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        logger.info("--------------securityConfigJAVA : Configuring HttpSecurity");
         http
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/ws/**").permitAll() // Permettre l'accès au point de terminaison WebSocket sans authentification
                 .requestMatchers("/api/login").permitAll() // Permettre l'accès à l'URL /api/login sans authentification
-                .anyRequest().authenticated() // Permettre l'accès à toutes les autres requêtes sans authentification
+                .anyRequest().authenticated() // Exiger l'authentification pour toutes les autres requêtes
             )
             .csrf(csrf -> csrf.disable()) // Désactiver CSRF pour les tests, mais à ne pas faire en production
             .httpBasic(Customizer.withDefaults()); // Utiliser l'authentification HTTP Basic pour simplifier
@@ -37,6 +39,11 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * Configure les paramètres CORS.
+     *
+     * @return l'objet CorsConfigurationSource configuré
+     */
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -49,10 +56,21 @@ public class SecurityConfig {
         return source;
     }
 
+    /**
+     * Fournit un service de gestion des utilisateurs.
+     *
+     * @return l'objet UserDetailsService configuré
+     */
     public UserDetailsService userDetailsService() {
         return new CustomUserDetailsService(); // Utiliser CustomUserDetailsService comme le seul bean UserDetailsService
     }
 
+    /**
+     * Fournit un encodeur de mots de passe.
+     *
+     * @return l'objet PasswordEncoder configuré
+     */
+    @SuppressWarnings("deprecation")
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance(); // Utiliser un encodeur de mots de passe qui ne fait rien
