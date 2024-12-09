@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.openclassrooms.ycyw.websocket.WebSocketConfigTest
--------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.153 s -- in com.openclassrooms.ycyw.websocket.WebSocketConfigTest
