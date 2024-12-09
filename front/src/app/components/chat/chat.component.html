@@ -1,0 +1,22 @@
+<div class="chat-wrapper">
+  <div class="chat-container">
+    <div class="logout-button">
+      <button (click)="logout()">Se déconnecter</button>
+    </div>
+    <div class="messages-container" #messagesContainer>
+      <div *ngFor="let message of messages" class="chat-message" [ngClass]="{'sent': message.senderId === userId, 'received': message.senderId !== userId}">
+        <div class="message-info">
+          <p class="sender"><strong>De:</strong> {{ message.senderSurname }} {{ message.senderName }}</p>
+        </div>
+        <div class="message-bubble">
+          <p>{{ message.content }}</p>
+          <p class="timestamp">{{ message.timestamp }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="chat-input">
+      <input [(ngModel)]="newMessage" placeholder="Tapez votre message ici..." />
+      <button (click)="sendMessage()">Envoyer</button>
+    </div>
+  </div>
+</div>
