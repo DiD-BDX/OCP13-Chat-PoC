@@ -1,0 +1,16 @@
+com/openclassrooms/ycyw/services/UtilisateurService.class
+com/openclassrooms/ycyw/YcywApplication.class
+com/openclassrooms/ycyw/config/SecurityConfig.class
+com/openclassrooms/ycyw/repository/ChatRepository.class
+com/openclassrooms/ycyw/repository/UtilisateurRepository.class
+com/openclassrooms/ycyw/models/Chat.class
+com/openclassrooms/ycyw/mapper/ChatMapper.class
+com/openclassrooms/ycyw/services/CustomUserDetailsService.class
+com/openclassrooms/ycyw/services/ChatService.class
+com/openclassrooms/ycyw/dto/ChatDTO.class
+com/openclassrooms/ycyw/models/Utilisateur.class
+com/openclassrooms/ycyw/websocket/WebSocketConfig.class
+com/openclassrooms/ycyw/dto/UtilisateurDTO.class
+com/openclassrooms/ycyw/controllers/ChatController.class
+com/openclassrooms/ycyw/controllers/UserController.class
+com/openclassrooms/ycyw/mapper/UtilisateurMapper.class
