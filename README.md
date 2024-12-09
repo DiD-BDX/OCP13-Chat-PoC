@@ -21,6 +21,7 @@ Ce projet est une preuve de concept (PoC) pour une application de chat en temps 
     - [Frontend](#frontend-3)
   - [Fonctionnalités](#fonctionnalités)
   - [Technologies utilisées](#technologies-utilisées)
+  - [Documentation Javadoc](#documentation-javadoc)
   - [Contributeurs](#contributeurs)
 
 ## Prérequis
@@ -125,6 +126,9 @@ Ce projet est une preuve de concept (PoC) pour une application de chat en temps 
 - Backend : Spring Boot, Spring Security, WebSocket, PostgreSQL
 - Frontend : Angular, RxJS, TypeScript
 - Outils : Maven, npm
+
+## Documentation Javadoc
+La documentation Javadoc pour le backend de ce projet est disponible [ici](./back/target/reports/apidocs/index.html)
 
 ## Contributeurs
 
