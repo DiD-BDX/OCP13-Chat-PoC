@@ -128,7 +128,7 @@ Ce projet est une preuve de concept (PoC) pour une application de chat en temps 
 - Outils : Maven, npm
 
 ## Documentation Javadoc
-La documentation Javadoc pour le backend de ce projet est disponible [ici](./back/target/reports/apidocs/index.html)
+La documentation Javadoc pour le backend de ce projet est disponible dans le dossier:  back/target/reports/apidocs/
 
 ## Contributeurs
 
