@@ -1,5 +1,8 @@
 <div class="chat-wrapper">
   <div class="chat-container">
+    <div class="logout-button">
+      <button (click)="logout()">Se déconnecter</button>
+    </div>
     <div class="messages-container" #messagesContainer>
       <div *ngFor="let message of messages" class="chat-message" [ngClass]="{'sent': message.senderId === userId, 'received': message.senderId !== userId}">
         <div class="message-info">
@@ -12,8 +15,8 @@
       </div>
     </div>
     <div class="chat-input">
-      <input [(ngModel)]="newMessage" placeholder="Type your message here..." />
-      <button (click)="sendMessage()">Send</button>
+      <input [(ngModel)]="newMessage" placeholder="Tapez votre message ici..." />
+      <button (click)="sendMessage()">Envoyer</button>
     </div>
   </div>
 </div>

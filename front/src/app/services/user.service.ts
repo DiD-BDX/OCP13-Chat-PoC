@@ -63,4 +63,10 @@ export class UserService {
     console.log('--------userServiceTS : Clearing stored credentials');
     sessionStorage.removeItem(this.credentialsKey);
   }
+
+  logout(): void {
+    console.log('--------userServiceTS : Logging out');
+    this.clearCredentials();
+    sessionStorage.clear(); // Vider le sessionStorage
+  }
 }

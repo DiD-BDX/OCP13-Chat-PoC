@@ -1,5 +1,5 @@
 export interface Message {
-    id: number;
+    //id: number;
     senderId: number;
     conversationId: number;
     content: string;
