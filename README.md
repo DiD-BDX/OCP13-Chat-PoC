@@ -1,6 +1,6 @@
 # Projet OC-P13-Chat-PoC
 
-Ce projet est une preuve de concept (PoC) pour une application de chat en temps réel utilisant Spring Boot pour le backend et Angular pour le frontend. L'application permet aux utilisateurs de se connecter, de rejoindre des conversations et d'échanger des messages via WebSocket.
+Ce projet est une preuve de concept (PoC) pour une application de chat en temps réel utilisant Spring Boot pour le backend et Angular pour le frontend. L'application permet aux utilisateurs de se connecter et d'échanger des messages via WebSocket.
 
 ## Sommaire
 
