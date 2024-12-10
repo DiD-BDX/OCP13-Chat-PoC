@@ -118,7 +118,6 @@ Ce projet est une preuve de concept (PoC) pour une application de chat en temps 
 
 - Connexion utilisateur
 - Envoi et réception de messages en temps réel via WebSocket
-- Affichage des conversations
 - Gestion des utilisateurs
 
 ## Technologies utilisées
@@ -128,7 +127,11 @@ Ce projet est une preuve de concept (PoC) pour une application de chat en temps 
 - Outils : Maven, npm
 
 ## Documentation Javadoc
+Pour génerer la documentation Javadoc, exécutez la commande suivante depuis le dossier racine du projet (backend):
+```mvn javadoc:javadoc ```
+
 La documentation Javadoc pour le backend de ce projet est disponible dans le dossier:  back/target/reports/apidocs/
+
 
 ## Contributeurs
 
