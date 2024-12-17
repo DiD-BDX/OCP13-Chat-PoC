@@ -37,13 +37,16 @@ export class WebsocketService {
    */
   public watch(topic: string): Observable<WebSocketMessage> {
     return new Observable((observer) => {
-      this.rxStomp.watch(topic).subscribe({
+      const subscription = this.rxStomp.watch(topic).subscribe({
         next: (message) => {
           observer.next({ body: message.body });
         },
         error: (err) => observer.error(err),
         complete: () => observer.complete()
       });
+
+    // Retourne une fonction de nettoyage qui se désabonne de l'observable
+    return () => subscription.unsubscribe();
     });
   }
 
